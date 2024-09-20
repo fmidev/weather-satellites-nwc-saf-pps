@@ -1,0 +1,9 @@
+channels:
+  - conda-forge
+  - /tmp/pps_v2021_patch3_conda_packages
+dependencies:
+  - level1c4pps
+  - nwcsaf_acpg
+  - nwcsaf_cpp
+  - nwcsaf_hrw
+  - python=3.8
