@@ -34,3 +34,7 @@ RUN microdnf -y update && \
 
 COPY --from=builder /opt/conda /opt/conda
 COPY --from=builder /usr/bin/micromamba /usr/bin/
+COPY entrypoint.sh /usr/bin/
+COPY run_pps.py /usr/bin/
+
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
