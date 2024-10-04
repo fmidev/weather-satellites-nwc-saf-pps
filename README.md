@@ -2,9 +2,9 @@
 # Container recipe for PPS
 
 ---
-*NOTE*
 
-Work in progress.
+**NOTE**: Work in progress.
+
 ---
 
 The aim of this container recipe is to build NWC SAF PPS with some
