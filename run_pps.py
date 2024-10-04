@@ -2,6 +2,7 @@
 
 def main():
     """Listen to messages and process them."""
+    import glob
     import os
     import sys
     import yaml
@@ -11,14 +12,22 @@ def main():
     with open(sys.argv[1], "r") as fid:
         config = yaml.load(fid, Loader=yaml.SafeLoader)
 
+    existing_file_pattern = config.get("existing_file_pattern", "*.nc")
+    product_pattern = os.path.join(os.environ["DATA_DIR"], "export", existing_file_pattern)
+    old_files = glob.glob(product_pattern)
+
     sub_config = config["subscriber"]
     with Subscribe(**sub_config) as sub:
         _process_messages(sub, config)
+
     # fname = "/data/l1b/hrpt_metop03_20210310_1911_12143.l1b"
     # l1c_fname = run_l1c4pps(fname, "avhrr", config["l1c_out_dir"])
     # l1c_fname = os.path.join(config["l1c_out_dir"], "S_NWC_avhrr_metopc_00000_20210310T1911174Z_20210310T1926396Z.nc")
     l1c_fname = run_l1c4pps(msg.data["uid"], "avhrr", config["l1c_out_dir"])
     run_pps(l1c_fname, config["pps_command"])
+
+    new_files = glob.glob(product_pattern)
+    print("New PPS product files:", set(new_files) - set(old_files))
 
 
 def _process_messages(sub, config):

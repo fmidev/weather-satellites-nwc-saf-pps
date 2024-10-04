@@ -49,6 +49,8 @@ The container configuration is simple:
 * subscriber settings for Posttroll
 * (internal) output location of Level 1C files
 * which PPS command to use for processing
+* a glob pattern to determine which files were generated
+  * later to be used in publishing the generated data
 
 ```yaml
 subscriber:
@@ -56,6 +58,7 @@ subscriber:
   addresses: "<hostname>:<port number>"
 l1c_out_dir: /data/polar/avhrr/ears/l1c
 pps_command: ppsRunAllParallel_inclCMaProb.py
+existing_file_pattern: "*.*"
 ```
 
 The PPS product output will be placed in `$DATA_DIR/export/`.
