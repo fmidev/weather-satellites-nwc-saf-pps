@@ -57,6 +57,9 @@ The container configuration is simple:
 subscriber:
   nameserver: False
   addresses: "<hostname>:<port number>"
+  topics:
+  - /hrpt/1B/avhrr
+  - /ears/avhrr/1b
 l1c_out_dir: /data/polar/avhrr/ears/l1c
 pps_command: ppsRunAllParallel_inclCMaProb.py
 existing_file_pattern: "S_NWC_.nc"
