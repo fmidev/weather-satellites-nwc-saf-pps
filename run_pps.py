@@ -15,8 +15,9 @@ def main():
     with Subscribe(**sub_config) as sub:
         _process_messages(sub, config)
     # fname = "/data/l1b/hrpt_metop03_20210310_1911_12143.l1b"
-    l1c_fname = run_l1c4pps(fname, "avhrr", config["l1c_out_dir"])
+    # l1c_fname = run_l1c4pps(fname, "avhrr", config["l1c_out_dir"])
     # l1c_fname = os.path.join(config["l1c_out_dir"], "S_NWC_avhrr_metopc_00000_20210310T1911174Z_20210310T1926396Z.nc")
+    l1c_fname = run_l1c4pps(msg.data["uid"], "avhrr", config["l1c_out_dir"])
     run_pps(l1c_fname, config["pps_command"])
 
 
@@ -50,7 +51,8 @@ def _get_processor(instrument):
 
 def run_pps(fname, pps_command):
     """Run PPS processing for the given file."""
-    cmd = [pps_command, "--no_cmic", "--anglesfile", fname]
+    # cmd = [pps_command, "--no_cmic", "--anglesfile", fname]
+    cmd = [pps_command, "--anglesfile", fname]
     run_popen(cmd)
 
 
