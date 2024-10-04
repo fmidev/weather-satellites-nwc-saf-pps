@@ -7,3 +7,7 @@ dependencies:
   - nwcsaf_cpp
   - nwcsaf_hrw
   - python=3.8
+  - pip
+  - pip:
+    - posttroll
+  - pyzmq
