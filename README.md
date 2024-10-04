@@ -1,11 +1,9 @@
 
 # Container recipe for PPS
 
----
 
-**NOTE**: Work in progress.
+> **NOTE**: Work in progress.
 
----
 
 The aim of this container recipe is to build NWC SAF PPS with some
 additions so that a incoming Posttroll message triggers conversion of
@@ -33,14 +31,17 @@ passing it to PPS.
 
 ## Configuration
 
-Configuration should be mounted to the internal `/config` directory.
+Configuration should be mounted to the internal `/config`
+directory. In addition to the normal PPS configurations, there are two
+special required files, described below.
 
 ### `/config/env-variables`
 
-This file contains the PPS environment variables. Which are
-plenty. The only that might need modification is `DATA_DIR`, which
-should point to the parent directory of `export/`, `import/`,
-`intermediate/`, `static/` and `tmp/` directories.
+This file contains the PPS environment variables, normally which are
+set in `source_me.bash` file of PPS. These variables are plenty. The
+only that might need modification is `DATA_DIR`, which should point to
+the parent directory of `export/`, `import/`, `intermediate/`,
+`static/` and `tmp/` directories.
 
 ### `run_pps.yaml`
 
