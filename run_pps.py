@@ -86,14 +86,14 @@ def run_pps(fname, pps_command):
 
 def run_popen(cmd):
     """Run a command with Popen."""
-    from subprocess import PIPE, Popen
+    from subprocess import PIPE, Popen, STDOUT
 
-    process = Popen(cmd, shell=False, stderr=PIPE, stdout=PIPE)
-    process.wait()
-    output, error = process.communicate()
-    print(output)
-    print()
-    print(error)
+    with Popen(cmd, shell=False, stderr=STDOUT, stdout=PIPE) as process:
+        while True:
+            stdout = process.stdout.read1().decode("utf-8")
+            print(stdout, flush=True, end="")
+            if process.poll() is not None:
+                break
 
 
 def publish_pps_data(pps_fnames, msg_data, config):
@@ -111,7 +111,7 @@ def publish_pps_data(pps_fnames, msg_data, config):
             "end_time": msg_data["end_time"]
         }
         msg_out = Message(publish_topic, "dataset", msg_data)
-        print(msg_out)
+        print("Publishing message:", msg_out)
         pub.send(str(msg_out))
 
 
