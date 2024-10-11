@@ -35,7 +35,7 @@ def _process_message(msg, config):
     old_files = _get_existing_product_files(config)
     l1c_fname = run_l1c4pps(msg.data["uid"], msg.data["sensor"], config["l1c_out_dir"])
     pps_fnames = run_pps(l1c_fname, config["pps_command"])
-    new_files = _get_existing_product_files(config)
+    new_files = set(_get_existing_product_files(config)) - set(old_files)
 
     if new_files:
         publish_pps_data(new_files, msg.data, config)
@@ -48,7 +48,7 @@ def _process_file(config):
     l1c_fname = run_l1c4pps(fname, "avhrr", config["l1c_out_dir"])
     run_pps(l1c_fname, config["pps_command"])
 
-    new_files = _get_existing_product_files(config)
+    new_files = set(_get_existing_product_files(config)) - set(old_files)
     if new_files:
         msg_data = {"sensor": "avhrr", "platform_name": "Metop-B", "start_time": "start_time", "end_time": "end_time"}
         publish_pps_data(new_files, msg_data, config)
