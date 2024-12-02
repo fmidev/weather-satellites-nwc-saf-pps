@@ -35,7 +35,6 @@ COPY --from=builder /usr/bin/micromamba /usr/bin/
 COPY entrypoint.sh /usr/bin/
 COPY run_pps.py /usr/bin/
 
-USER 1001
 EXPOSE 40000
 
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
